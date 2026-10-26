@@ -225,8 +225,8 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "us",
-        kb_variant = "",
+        kb_layout  = "us,rs,rs",
+        kb_variant = ",latin,",
         kb_model   = "",
         kb_options = "",
         kb_rules   = "",
@@ -271,6 +271,7 @@ hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("hyprctl switchxkblayout all next")) -- us -> rs latin -> rs cyrillic
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
