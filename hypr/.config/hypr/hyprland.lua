@@ -15,6 +15,24 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+
+-- Laptop panel is the anchor at 0x0
+hl.monitor({
+    output   = "eDP-1",
+    mode     = "preferred",
+    position = "0x0",
+    scale    = 1,
+})
+
+-- External HDMI goes above the laptop
+hl.monitor({
+    output   = "HDMI-A-1",
+    mode     = "preferred",
+    position = "auto-up",
+    scale    = 1,
+})
+
+-- Any other monitor: preferred mode, automatic position
 hl.monitor({
     output   = "",
     mode     = "preferred",
