@@ -8,6 +8,10 @@ path=("$HOME/.local/bin" $path)
 export PATH
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
 
+# Boje za newt TUI (nmtui i sl.): ANSI imena koja kitty mapira na paletu,
+# "default" znači providna pozadina terminala
+export NEWT_COLORS='root=white,default;border=magenta,default;window=lightgray,default;shadow=default,default;title=brightmagenta,default;button=black,magenta;actbutton=black,brightmagenta;compactbutton=lightgray,default;checkbox=lightgray,default;actcheckbox=black,brightmagenta;entry=white,default;disentry=gray,default;label=lightgray,default;listbox=lightgray,default;actlistbox=black,magenta;sellistbox=brightmagenta,default;actsellistbox=black,brightmagenta;textbox=lightgray,default;acttextbox=black,magenta;helpline=gray,default;roottext=gray,default'
+
 # Aliasi
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
