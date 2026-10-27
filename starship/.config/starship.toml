@@ -1,0 +1,74 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Gore: [user@host preko SSH-a] putanja, git, python, docker, trajanje
+# Dole: ❯
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$python\
+$docker_context\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = false
+palette = 'sljiva_u_magli'
+
+# Preslikano iz theme/palette (starship ne može da učita spoljni fajl)
+[palettes.sljiva_u_magli]
+kora = '#2A2C2B'
+mokra_kora = '#3B3433'
+magla = '#8C8A86'
+izmaglica = '#E9E5E1'
+latica = '#F7F3EF'
+tresnja = '#D9A7B0'
+zrela_tresnja = '#B8798A'
+zalfija = '#9DAE96'
+mahovina = '#6E7F66'
+kamelija = '#C26B73'
+sveca = '#D4B07A'
+kisa = '#8A9DAE'
+
+[username]
+show_always = false
+style_user = 'tresnja'
+style_root = 'kamelija'
+format = '[$user]($style)'
+
+[hostname]
+ssh_only = true
+style = 'tresnja'
+format = '[@$hostname]($style) [in](magla) '
+
+[directory]
+style = 'kisa'
+read_only_style = 'kamelija'
+format = '[$path]($style)[$read_only]($read_only_style) '
+
+[git_branch]
+style = 'zrela_tresnja'
+format = '[on](magla) [$symbol$branch(:$remote_branch)]($style) '
+
+[git_status]
+style = 'sveca'
+format = '([\[$all_status$ahead_behind\]]($style) )'
+
+[python]
+style = 'zalfija'
+format = '[via](magla) [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[docker_context]
+style = 'kisa'
+format = '[via](magla) [$symbol$context]($style) '
+
+[cmd_duration]
+min_time = 3_000
+style = 'magla'
+format = '[took](magla) [$duration]($style) '
+
+[character]
+success_symbol = '[❯](tresnja)'
+error_symbol = '[❯](kamelija)'
