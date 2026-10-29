@@ -1,0 +1,93 @@
+@import "colors.css";
+
+* {
+    font-family: "BlexMono Nerd Font", "IBM Plex Mono", monospace;
+    font-size: 13px;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+}
+
+/* Sloj je cele širine ali providan, vidi se samo pilula */
+window#waybar {
+    background: transparent;
+}
+
+.modules-center {
+    background: alpha(@kora, 0.35);
+    border-top: 1px solid alpha(@izmaglica, 0.25);
+    border-radius: 999px;
+    padding: 5px 18px;
+    color: @izmaglica;
+}
+
+#workspaces button {
+    background: transparent;
+    box-shadow: none;
+    color: @magla;
+    padding: 0 3px;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    box-shadow: none;
+}
+
+#workspaces button.active {
+    color: @tresnja;
+}
+
+#custom-sep {
+    color: @magla;
+    padding: 0 8px;
+}
+
+#clock,
+#language,
+#network,
+#pulseaudio,
+#bluetooth,
+#battery {
+    color: @izmaglica;
+    padding: 0 6px;
+}
+
+#language {
+    color: @kisa;
+}
+
+#clock {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin: -10px 0 -5px 0;
+}
+
+#network.disconnected,
+#pulseaudio.muted,
+#bluetooth.off,
+#bluetooth.disabled {
+    color: @magla;
+}
+
+#battery {
+    color: @zalfija;
+}
+
+#battery.warning:not(.charging) {
+    color: @sveca;
+}
+
+#battery.critical:not(.charging) {
+    color: @kamelija;
+}
+
+tooltip {
+    background: alpha(@kora, 0.9);
+    border: 1px solid alpha(@izmaglica, 0.25);
+    border-radius: 12px;
+}
+
+tooltip label {
+    color: @izmaglica;
+}

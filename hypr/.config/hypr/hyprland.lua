@@ -70,6 +70,7 @@ local menu        = "hyprlauncher"
 
 hl.on("hyprland.start", function ()
     hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("waybar")
 end)
 
 
@@ -321,4 +322,23 @@ hl.window_rule({
 
     move  = "20 monitor_h-120",
     float = true,
+})
+
+-- Blur behind the waybar pill; ignore_alpha skips the transparent rest of the layer
+hl.layer_rule({
+    name  = "blur-waybar",
+    match = { namespace = "^waybar$" },
+
+    blur         = true,
+    ignore_alpha = 0.1,
+})
+
+-- Small floating TUIs opened from waybar (kitty --class floating-tui, pavucontrol)
+hl.window_rule({
+    name  = "floating-tui",
+    match = { class = "^(floating-tui|org\\.pulseaudio\\.pavucontrol|bluetui)$" },
+
+    float  = true,
+    size   = "720 480",
+    center = true,
 })

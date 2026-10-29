@@ -1,0 +1,103 @@
+// Jedna plutajuća pilula na vrhu, centrirana
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 8,
+    "spacing": 0,
+
+    "modules-left": [],
+    "modules-center": [
+        "hyprland/workspaces",
+        "custom/sep",
+        "clock",
+        "custom/sep",
+        "hyprland/language",
+        "network",
+        "pulseaudio",
+        "bluetooth",
+        "battery"
+    ],
+    "modules-right": [],
+
+    // Kamenčići: aktivni ●, zauzeti ●, prazni ○ (boje u style.css)
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "●",
+            "default": "●",
+            "empty": "○",
+            "persistent": "○"
+        },
+        "persistent-workspaces": {
+            "*": [1, 2, 3, 4]
+        },
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'"
+    },
+
+    "custom/sep": {
+        "format": "·",
+        "tooltip": false
+    },
+
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "today": "<b><u>{}</u></b>"
+            }
+        }
+    },
+
+    // us, rs latin i rs ćirilica; ključ je format-<shortDescription>[-<variant>]
+    // rs i rs latin oba imaju shortDescription "sr", pa latinicu hvata
+    // format-sr-latin, a ćirilica (bez varijante) pada na format-sr
+    "hyprland/language": {
+        "format": "{}",
+        "format-en": "us",
+        "format-sr-latin": "sr",
+        "format-sr": "ср"
+    },
+
+    "network": {
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰤭",
+        "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi": "{essid} {signalStrength}%",
+        "tooltip-format-ethernet": "{ifname}",
+        "tooltip-format-disconnected": "nema mreže",
+        // zsh -i da bi nmtui dobio NEWT_COLORS iz .zshrc
+        "on-click": "kitty --class floating-tui -e zsh -ic nmtui"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 {volume}%",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-connected": "󰂱",
+        "format-off": "󰂲",
+        "format-disabled": "󰂲",
+        "tooltip-format-connected": "{device_alias}",
+        "on-click": "kitty --class floating-tui -e bluetui"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"]
+    }
+}
