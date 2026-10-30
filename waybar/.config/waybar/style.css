@@ -56,6 +56,15 @@ window#waybar {
     color: @kisa;
 }
 
+#custom-updates {
+    color: @magla;
+    padding: 0 6px;
+}
+
+#custom-updates.many {
+    color: @sveca;
+}
+
 #clock {
     font-family: "Cormorant Garamond", serif;
     font-weight: 600;

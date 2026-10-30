@@ -11,6 +11,7 @@
         "custom/sep",
         "clock",
         "custom/sep",
+        "custom/updates",
         "hyprland/language",
         "network",
         "pulseaudio",
@@ -51,6 +52,16 @@
         }
     },
 
+    // repo + AUR, provera na sat; bez update-a modul je sakriven
+    // klik: vesti, yay -Syu, pa signal 8 osvežava modul
+    "custom/updates": {
+        "exec": "~/.config/waybar/scripts/updates.sh",
+        "return-type": "json",
+        "interval": 3600,
+        "signal": 8,
+        "on-click": "kitty -e sh -c 'yay -Pw; yay -Syu; pkill -RTMIN+8 waybar; printf \"\\nEnter za zatvaranje \"; read _'"
+    },
+
     // us, rs latin i rs ćirilica; ključ je format-<shortDescription>[-<variant>]
     // rs i rs latin oba imaju shortDescription "sr", pa latinicu hvata
     // format-sr-latin, a ćirilica (bez varijante) pada na format-sr
@@ -79,7 +90,7 @@
         "format-icons": {
             "default": ["󰕿", "󰖀", "󰕾"]
         },
-        "on-click": "pavucontrol"
+        "on-click": "kitty --class floating-tui -e wiremix"
     },
 
     "bluetooth": {
