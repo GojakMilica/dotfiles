@@ -1,6 +1,6 @@
 configuration {
     modi:                 "drun,window,run";
-    show-icons:           true;
+    show-icons:           false;
     drun-display-format:  "{name}";
     window-format:        "{c}  {t}";
     display-drun:         "aplikacije";

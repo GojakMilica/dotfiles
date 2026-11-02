@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Obrada slike za temu: paleta (lutgen) → blago potamni → desna trećina prelazi u koru.
+# Obrada slike za temu: paleta (lutgen) → blago potamni → desna polovina se pretapa u providno.
 # Original se ne dira, rezultat ide u theme/images/generated/.
 #
 # Upotreba: theme/process-image.sh SLIKA [ŠIRINA:VISINA]
@@ -13,10 +13,9 @@ out_dir="$dir/images/generated"
 
 in=${1:?Upotreba: $0 SLIKA [ŠIRINA:VISINA]}
 ratio=${2:-}
-out="$out_dir/$(basename "${in%.*}").jpg"
+out="$out_dir/$(basename "${in%.*}").png"
 
 mapfile -t colors < <(grep -E '^[a-z_]+=#' "$palette" | cut -d= -f2)
-kora=$(grep '^kora=' "$palette" | cut -d= -f2)
 
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
@@ -28,7 +27,7 @@ lutgen apply -o "$tmp/paleta.png" "$in" -- "${colors[@]}"
 # 2. opciono iseci na odnos, smanji (rofi ne treba 5000px) i blago potamni
 crop=()
 if [[ -n $ratio ]]; then
-    read -r w h < <(magick identify -format '%w %h' "$tmp/paleta.png")
+    read -r w h < <(magick identify -format '%w %h\n' "$tmp/paleta.png")
     rw=${ratio%:*} rh=${ratio#*:}
     cw=$(( h * rw / rh )) ch=$h
     if (( cw > w )); then cw=$w ch=$(( w * rh / rw )); fi
@@ -36,10 +35,13 @@ if [[ -n $ratio ]]; then
 fi
 magick "$tmp/paleta.png" "${crop[@]}" -resize 'x1080>' -modulate 85 "$tmp/tamna.png"
 
-# 3. desna trećina prelazi iz providnog u koru
-read -r w h < <(magick identify -format '%w %h' "$tmp/tamna.png")
-magick "$tmp/tamna.png" \
-    \( -size "$(( w / 3 ))x$h" -define gradient:direction=east "gradient:${kora}00-${kora}" \) \
-    -gravity east -composite -quality 90 "$out"
+# 3. desna polovina postepeno postaje providna, pa se kroz nju vidi pozadina prozora
+#    (ista kao iza panela, bez šava); sigmoid omekšava oba kraja prelaza
+read -r w h < <(magick identify -format '%w %h\n' "$tmp/tamna.png")
+fade=$(( w / 2 ))
+magick -size "$(( w - fade ))x$h" xc:white \
+    \( -size "${fade}x$h" -define gradient:direction=east gradient:white-black -sigmoidal-contrast 5x50% \) \
+    +append "$tmp/maska.png"
+magick "$tmp/tamna.png" "$tmp/maska.png" -alpha off -compose CopyOpacity -composite "$out"
 
 echo "$out"

@@ -6,6 +6,7 @@
     mokra-kora:     #3B3433;
     magla:          #8C8A86;
     izmaglica:      #E9E5E1;
+    izmaglica-tiha: #E9E5E1B3; /* izmaglica, ~70% — stavke liste, čitljivije od magle */
     tresnja:        #D9A7B0;
     zrela-tresnja:  #B8798A;
 
@@ -17,7 +18,7 @@
 window {
     location:         center;
     anchor:           center;
-    width:            560px;
+    width:            620px;
     border:           1px;
     border-color:     @magla;
     border-radius:    16px;
@@ -35,9 +36,9 @@ mainbox {
 
 slika {
     expand:           false;
-    width:            170px;
+    width:            230px;
     border-radius:    15px 0 0 15px;
-    background-image: url("~/dotfiles/theme/images/generated/reka.jpg", both);
+    background-image: url("~/dotfiles/theme/images/generated/reka.png", both);
 }
 
 desno {
@@ -48,14 +49,17 @@ desno {
 }
 
 inputbar {
-    children:         [ "lupa", "entry" ];
+    children:         [ "textbox-lupa", "entry" ];
     padding:          10px 14px;
     spacing:          10px;
     border-radius:    10px;
     background-color: @mokra-kora;
 }
 
-lupa {
+/* Nerd Font glif je širi od jednog mono znaka, pa mu treba fiksna širina */
+textbox-lupa {
+    width:            1.5em;
+    horizontal-align: 0.5;
     expand:     false;
     str:        "";
     text-color: @tresnja;
@@ -84,12 +88,13 @@ element {
 
 element normal.normal,
 element alternate.normal {
-    text-color: @magla;
+    text-color: @izmaglica-tiha;
 }
 
+/* mirno isticanje, isto kao izabrano dugme u mode-switcheru */
 element selected.normal {
-    background-color: @zrela-tresnja;
-    text-color:       @kora;
+    background-color: @mokra-kora;
+    text-color:       @tresnja;
 }
 
 element-icon {
