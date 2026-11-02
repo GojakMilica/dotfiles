@@ -1,0 +1,14 @@
+configuration {
+    modi:                 "drun,window,run";
+    show-icons:           true;
+    drun-display-format:  "{name}";
+    window-format:        "{c}  {t}";
+    display-drun:         "aplikacije";
+    display-window:       "prozori";
+    display-run:          "komande";
+    hover-select:         true;
+    me-select-entry:      "";
+    me-accept-entry:      "MousePrimary";
+}
+
+@theme "~/.config/rofi/sljiva.rasi"

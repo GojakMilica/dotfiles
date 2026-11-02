@@ -50,7 +50,7 @@ local terminal    = "kitty"
 local fileManager = "thunar"
 local browser     = "vivaldi-stable"
 local lock        = "hyprlock"
-local menu        = "hyprlauncher"
+local menu        = "rofi -show drun"
 
 
 -------------------
@@ -328,6 +328,15 @@ hl.window_rule({
 hl.layer_rule({
     name  = "blur-waybar",
     match = { namespace = "^waybar$" },
+
+    blur         = true,
+    ignore_alpha = 0.1,
+})
+
+-- Blur behind rofi (providna kora u sljiva.rasi)
+hl.layer_rule({
+    name  = "blur-rofi",
+    match = { namespace = "^rofi$" },
 
     blur         = true,
     ignore_alpha = 0.1,

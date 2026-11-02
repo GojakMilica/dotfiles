@@ -1,0 +1,119 @@
+/* Šljiva u magli — rofi tema. Boje prepisane iz theme/palette */
+
+* {
+    kora:           #2A2C2B;
+    kora-providna:  #2A2C2BD9; /* kora, ~85% — da Hyprland blur prosijava */
+    mokra-kora:     #3B3433;
+    magla:          #8C8A86;
+    izmaglica:      #E9E5E1;
+    tresnja:        #D9A7B0;
+    zrela-tresnja:  #B8798A;
+
+    font:             "BlexMono Nerd Font 13";
+    background-color: transparent;
+    text-color:       @izmaglica;
+}
+
+window {
+    location:         center;
+    anchor:           center;
+    width:            560px;
+    border:           1px;
+    border-color:     @magla;
+    border-radius:    16px;
+    background-color: @kora-providna;
+}
+
+/* svetlija ivica na vrhu, unutar tanke ivice prozora */
+mainbox {
+    orientation:   horizontal;
+    children:      [ "slika", "desno" ];
+    border:        1px 0 0 0;
+    border-color:  @izmaglica;
+    border-radius: 15px 15px 0 0;
+}
+
+slika {
+    expand:           false;
+    width:            170px;
+    border-radius:    15px 0 0 15px;
+    background-image: url("~/dotfiles/theme/images/generated/reka.jpg", both);
+}
+
+desno {
+    orientation: vertical;
+    children:    [ "inputbar", "listview", "mode-switcher" ];
+    padding:     16px;
+    spacing:     12px;
+}
+
+inputbar {
+    children:         [ "lupa", "entry" ];
+    padding:          10px 14px;
+    spacing:          10px;
+    border-radius:    10px;
+    background-color: @mokra-kora;
+}
+
+lupa {
+    expand:     false;
+    str:        "";
+    text-color: @tresnja;
+}
+
+entry {
+    placeholder:       "pretraga…";
+    placeholder-color: @magla;
+    cursor-color:      @tresnja;
+}
+
+listview {
+    lines:        6;
+    columns:      1;
+    fixed-height: true;
+    scrollbar:    false;
+    spacing:      4px;
+}
+
+element {
+    padding:       8px 12px;
+    spacing:       12px;
+    border-radius: 10px;
+    cursor:        pointer;
+}
+
+element normal.normal,
+element alternate.normal {
+    text-color: @magla;
+}
+
+element selected.normal {
+    background-color: @zrela-tresnja;
+    text-color:       @kora;
+}
+
+element-icon {
+    size:       24px;
+    text-color: inherit;
+}
+
+element-text {
+    text-color:     inherit;
+    vertical-align: 0.5;
+}
+
+mode-switcher {
+    spacing: 8px;
+}
+
+button {
+    padding:       4px 0;
+    border-radius: 8px;
+    text-color:    @magla;
+    cursor:        pointer;
+}
+
+button selected {
+    background-color: @mokra-kora;
+    text-color:       @tresnja;
+}
